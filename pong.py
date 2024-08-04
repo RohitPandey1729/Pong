@@ -4,27 +4,58 @@ import os
 wn = turtle.Screen()
 wn.title("Pong")
 wn.bgcolor("black")
-wn.setup(width=800, height=600)
-wn.tracer(0)
-
-# Score
-score_a = 0
-score_b = 0
+wn.setup(width=800, height=600 )
+wn.tracer(0)            # Helps speed up the game.  
 
 # Paddle A
-paddle_a = turtle.Turtle()
-paddle_a.speed(0)
+paddle_a = turtle.Turtle()  #Turtle object
+paddle_a.speed(0)     #Speed of animation
 paddle_a.shape("square")
 paddle_a.color("white")
-paddle_a.shapesize(stretch_wid=5,stretch_len=1)
-paddle_a.penup()
+paddle_a.shapesize(stretch_wid=5, stretch_len=1)
+paddle_a.penup()        #Makes sure that the pen does not draw
 paddle_a.goto(-350, 0)
 
 # Paddle B
-paddle_b = turtle.Turtle()
-paddle_b.speed(0)
+paddle_b = turtle.Turtle()  #Turtle object
+paddle_b.speed(0)     #Speed of animation
 paddle_b.shape("square")
 paddle_b.color("white")
-paddle_b.shapesize(stretch_wid=5,stretch_len=1)
-paddle_b.penup()
+paddle_b.shapesize(stretch_wid=5, stretch_len=1)
+paddle_b.penup()        #Makes sure that the pen does not draw
 paddle_b.goto(350, 0)
+# Ball
+ball = turtle.Turtle()  
+ball.speed(0)     
+ball.shape("square")
+ball.color("white")
+ball.penup()        
+ball.goto(0, 0)
+
+
+# Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.shape("square")
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
+
+# Functions
+def paddle_a_up():
+    y = paddle_a.ycor()
+    y += 20
+    paddle_a.sety(y)
+
+def paddle_a_down():
+    y = paddle_a.ycor()
+    y -= 20
+    paddle_a.sety(y)
+
+
+
+# Main game loop
+while True:
+    wn.update()
