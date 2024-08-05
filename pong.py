@@ -31,8 +31,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()        
 ball.goto(0, 0)
-ball.dx = 0.1
-ball.dy = 0.1   
+ball.dx = 0.05
+ball.dy = -0.05
 
 # Pen
 pen = turtle.Turtle()
@@ -87,17 +87,24 @@ while True:
     if ball.ycor() > 290:   
         ball.sety(290)
         ball.dy *= -1       # Reverses the direction
-        os.system("afplay bounce.wav&")
-    
-    elif ball.ycor() < -290:
-        ball.sety(-290)
-        ball.dy *= -1
-        os.system("afplay bounce.wav&")
 
-    # Left and right
-    if ball.xcor() > 350:
-        score_a += 1
-        pen.clear()
-        pen.write("Player A: {}  Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+    if ball.ycor() < -290:   
+        ball.sety(-290)
+        ball.dy *= -1  
+    
+    if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
+
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
+    # Paddle and ball collisions
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(340)
+        ball.dx *= -1 
+
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
+        ball.setx(-340)
+        ball.dx *= -1     
